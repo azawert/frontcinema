@@ -1,6 +1,6 @@
-export const API_URL = `${process.env.REACT_APP_SERVER_URL}/api`
+export const API_URL = `http://localhost:9999/api`
 
-export const getGenresUrl = (string:string) => `/genres${string}`
+export const getGenresUrl = (string:string) => `/genre${string}`
 export const getMoviesUrl = (string:string) => `/movies${string}`
 export const getRatingsUrl = (string:string) => `/ratings${string}`
 export const getActorsUrl = (string:string) => `/genres${string}`
