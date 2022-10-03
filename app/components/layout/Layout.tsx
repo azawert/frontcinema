@@ -5,7 +5,7 @@ import Sidebar from '@/components/layout/Sidebar/Sidebar'
 
 import styles from './Layout.module.scss'
 
-const Layout: FC<{ children: ReactNode; className: string }> = ({
+const Layout: FC<{ children?: ReactNode; className?: string }> = ({
 	children,
 }) => {
 	return (
