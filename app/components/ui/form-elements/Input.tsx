@@ -1,7 +1,17 @@
-import React, { FC } from 'react'
+import React, {FC, forwardRef} from 'react'
+import {IField} from "@/ui/form-elements/form.interface";
+import styles from './Form.module.scss'
+import cn from 'classnames'
+const Input = forwardRef<HTMLInputElement,IField>( ({placeholder,error,type='text',style,...rest},ref) => {
+	return <div className={cn(styles.common,styles.field)} style={style}>
+		<label>
+			<span>{placeholder}</span>
+			<input ref={ref} type={type} {...rest}/>
+		</label>
 
-const Input: FC = () => {
-	return <div></div>
-}
+		{error && <div className={styles.error}>{error.message}</div>}
+	</div>
+})
 
+Input.displayName = 'Field'
 export default Input
