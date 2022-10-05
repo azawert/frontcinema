@@ -1,11 +1,31 @@
-import React, {FC} from 'react';
+import { FC, MouseEvent } from 'react'
 
-const LogoutButton:FC = () => {
-    return (
-        <div>
+import MaterialIcon from '@/ui/MaterialIcon'
 
-        </div>
-    );
-};
+import { useActions } from '@/hooks/useActions'
+import { useAuth } from '@/hooks/useAuth'
 
-export default LogoutButton;
+const LogoutButton: FC = () => {
+	const { logout } = useActions()
+	const { user } = useAuth()
+
+	const logoutHandler = (e: MouseEvent<HTMLAnchorElement>) => {
+		e.preventDefault()
+		logout()
+	}
+
+	return (
+		<>
+			{user && (
+				<li>
+					<a onClick={logoutHandler}>
+						<MaterialIcon name="MdLogout" />
+						<span>Logout</span>
+					</a>
+				</li>
+			)}
+		</>
+	)
+}
+
+export default LogoutButton

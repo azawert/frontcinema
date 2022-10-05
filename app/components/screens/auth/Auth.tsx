@@ -1,20 +1,19 @@
 import React, { FC, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
+import AuthFields from '@/screens/auth/AuthFields'
 import { IAuthInput } from '@/screens/auth/auth.interface'
 import { useAuthRedirect } from '@/screens/auth/useAuthRedirect'
 
 import Button from '@/ui/form-elements/Button'
 import Heading from '@/ui/heading/Heading'
 
+import { useActions } from '@/hooks/useActions'
 import { useAuth } from '@/hooks/useAuth'
 
 import Meta from '@/utils/meta/Meta'
 
 import styles from './Auth.module.scss'
-
-import AuthFields from "@/screens/auth/AuthFields";
-
 
 const Auth: FC = () => {
 	useAuthRedirect()
@@ -27,19 +26,17 @@ const Auth: FC = () => {
 		handleSubmit,
 		formState,
 		reset,
-
 	} = useForm<IAuthInput>({
 		mode: 'onChange',
 	})
-	const log = (data: any) => {alert(data)}
-	const reg = (data: any) => {alert(data)}
+	const { login, register } = useActions()
 
 	const onSubmit: SubmitHandler<IAuthInput> = (data) => {
 		if (type === 'registration') {
-			reg(data)
+			register(data)
 		}
 		if (type === 'login') {
-			log(data)
+			login(data)
 		}
 	}
 	return (
@@ -47,14 +44,16 @@ const Auth: FC = () => {
 			<section className={styles.wrapper}>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<Heading title={'Auth'} className="mb-6" />
-					<AuthFields register={registerInput} formState={formState} isPasswordRequired/>
+					<AuthFields
+						register={registerInput}
+						formState={formState}
+						isPasswordRequired
+					/>
 					<div className={styles.buttons}>
-
 						<Button
 							type="submit"
 							onClick={() => setType('login')}
 							disabled={isLoading}
-
 						>
 							Login
 						</Button>
