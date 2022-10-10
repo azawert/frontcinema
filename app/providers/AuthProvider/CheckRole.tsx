@@ -1,26 +1,27 @@
-import React, {FC} from 'react';
-import {TypeComponentAuthFields, TypeRoles} from "@/shared/types/auth.types";
-import {useAuth} from "@/hooks/useAuth";
-import {useRouter} from "next/router";
+import { useRouter } from 'next/router'
+import React, { FC } from 'react'
 
-const CheckRole:FC<TypeComponentAuthFields> = ({Component:{isOnlyUser,isOnlyAdmin,children},}) => {
-    const {user} = useAuth()
-    const router = useRouter()
-    const Children = () => <>{children}</>
+import { useAuth } from '@/hooks/useAuth'
 
-    if(user?.isAdmin) return <Children/>
-    if(isOnlyAdmin) {
-        router.pathname !== '/404' && router.replace('/404')
-        return null
-    }
-    const isUser = user && !user.isAdmin
-    if(isUser && isOnlyUser) {
-        return <Children/>
-    } else {
-        router.pathname !== '/auth' && router.replace('/auth')
-        return null
-    }
+import { TypeComponentAuthFields, TypeRoles } from '@/shared/types/auth.types'
 
-};
+const CheckRole: FC<TypeComponentAuthFields> = ({ Component, children }) => {
+	const { user } = useAuth()
+	const router = useRouter()
+	const Children = () => <>{children}</>
 
-export default CheckRole;
+	if (user?.isAdmin) return <Children />
+	if (Component?.isOnlyAdmin) {
+		router.pathname !== '/404' && router.replace('/404')
+		return null
+	}
+	const isUser = user && !user.isAdmin
+	if (isUser && Component?.isOnlyUser) {
+		return <Children />
+	} else {
+		router.pathname !== '/auth' && router.replace('/auth')
+		return null
+	}
+}
+
+export default CheckRole

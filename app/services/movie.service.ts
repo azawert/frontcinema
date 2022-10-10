@@ -3,6 +3,7 @@ import { useQuery } from 'react-query'
 import { IMovie } from '@/shared/types/movie.types'
 
 import { axiosClassic } from '../api/interceptors'
+import axios from '../api/interceptors'
 import { getMoviesUrl } from '../config/api.config'
 
 export const movieService = {
@@ -17,5 +18,8 @@ export const movieService = {
 	},
 	async getPopularMovies() {
 		return axiosClassic.get<IMovie[]>(getMoviesUrl('/popular'))
+	},
+	async deleteMovie(_id: string) {
+		return axios.delete<string>(getMoviesUrl(`/${_id}`))
 	},
 }

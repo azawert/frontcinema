@@ -1,10 +1,12 @@
 import React, { FC } from 'react'
-import {NextPageAuth} from "@/shared/types/auth.types";
+
+import Admin from '@/screens/admin/home/Admin'
+
+import { NextPageAuth } from '@/shared/types/auth.types'
 
 const AdminPage: NextPageAuth = () => {
-	return <div></div>
-
-	AdminPage.isOnlyAdmin = true
+	return <Admin />
 }
 
+AdminPage.isOnlyAdmin = true
 export default AdminPage
