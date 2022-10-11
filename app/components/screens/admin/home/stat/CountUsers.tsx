@@ -20,7 +20,7 @@ const CountUsers: FC = () => {
 			) : (
 				<div className={styles.number}>{data?.data}</div>
 			)}
-			<div className={styles.description}>users</div>
+			<div className={styles.description}>{data?.data=== 1 ? 'user' :'users'}</div>
 		</div>
 	)
 }
