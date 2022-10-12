@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { useForm } from 'react-hook-form'
+import {Controller, useForm } from 'react-hook-form'
 
 import { IGenreEditInput } from '@/screens/admin/genre/genreedit.interface'
 import { useGenreEdit } from '@/screens/admin/genre/useGenreEdit'
@@ -14,6 +14,10 @@ import Heading from '@/ui/heading/Heading'
 
 import Meta from '@/utils/meta/Meta'
 import { slugify } from '@/utils/string/generateSlug'
+import {stripHtml} from "string-strip-html";
+import dynamic from "next/dynamic";
+
+const DynamicTextEditor = dynamic(()=>import('@/ui/form-elements/TextEditor'),{ssr:false})
 
 const GenreEdit: FC = () => {
 	const {
@@ -22,6 +26,7 @@ const GenreEdit: FC = () => {
 		formState: { errors },
 		setValue,
 		getValues,
+		control
 	} = useForm<IGenreEditInput>({
 		mode: 'onChange',
 	})
@@ -55,8 +60,10 @@ const GenreEdit: FC = () => {
 								placeholder={'иконка...'}
 								style={{ width: '31%' }}
 							/>
-							<Button key={'UpdateSlugButton'}>Update</Button>
 						</div>
+							<Controller control={control} name={'name'} render={({field:{value,onChange},fieldState:{error}})=>(<DynamicTextEditor onChange={onChange} value={value} error={error}  placeholder={'Описание'}/>)} defaultValue={''} rules={{validate:{required:(v)=>(v&&stripHtml(v).result.length > 0 ) || 'Description is required'}}}  />
+							<Button key={'UpdateSlugButton'}>Update</Button>
+
 					</>
 				)}
 			</form>

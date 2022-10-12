@@ -14,7 +14,7 @@ const Home: FC<IHome> = () => {
 				title={'Watch movies online!'}
 				className={'text-gray-400 mb-8 text-xl'}
 			/>
-			<button onClick={() => toastr.success('Okay', '')}>Click</button>
+
 		</Meta>
 	)
 }

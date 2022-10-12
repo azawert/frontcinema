@@ -4,10 +4,11 @@ import { FormState, UseFormRegister } from 'react-hook-form'
 import Input from '@/ui/form-elements/Input'
 
 import { validEmail } from '@/shared/regex'
+import {IAuthInput} from "@/screens/auth/auth.interface";
 
 interface IAuthFields {
 	register: UseFormRegister<any>
-	formState: FormState<any>
+	formState: FormState<IAuthInput>
 	isPasswordRequired?: boolean
 }
 

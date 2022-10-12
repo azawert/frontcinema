@@ -28,8 +28,9 @@ export const useGenreEdit = (setValue:UseFormSetValue<IGenreEditInput>) => {
             toastError('Проблема с обновлением жанра')
         },
         onSuccess: () => {
+
+            push(getAdminUrl('genres')).then().catch(e => e)
             toastr.success('Жанр был обновлен','')
-            push(getAdminUrl('genres'))
         }
     })
 
