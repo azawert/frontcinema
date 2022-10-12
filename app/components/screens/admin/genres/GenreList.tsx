@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import React from 'react'
 
 import { useGenres } from '@/screens/admin/genres/useGenres'
@@ -10,13 +11,25 @@ import Heading from '@/ui/heading/Heading'
 import Meta from '@/utils/meta/Meta'
 
 const GenreList = () => {
-	const { handleSearch, searchTerm, deleteAsync, data, isLoading } = useGenres()
+	const {
+		handleSearch,
+		searchTerm,
+		deleteAsync,
+		data,
+		isLoading,
+		createAsync,
+	} = useGenres()
+	const { pathname } = useRouter()
 	return (
 		<Meta title={'Genres'}>
 			<AdminNavigation />
 			<Heading title={'Genres'} />
 
-			<AdminHeader handleSearch={handleSearch} searchTerm={searchTerm} />
+			<AdminHeader
+				handleSearch={handleSearch}
+				searchTerm={searchTerm}
+				onClick={createAsync}
+			/>
 			{
 				<AdminTable
 					headerItems={['Name', 'Slug']}

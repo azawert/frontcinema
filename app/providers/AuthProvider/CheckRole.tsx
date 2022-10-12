@@ -12,7 +12,7 @@ const CheckRole: FC<TypeComponentAuthFields> = ({ Component, children }) => {
 
 	if (user?.isAdmin) return <Children />
 	if (Component?.isOnlyAdmin) {
-		router.pathname !== '/404' && router.replace('/404')
+		router.pathname !== '/404' && router.replace('/403')
 		return null
 	}
 	const isUser = user && !user.isAdmin
