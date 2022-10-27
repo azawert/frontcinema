@@ -1,0 +1,11 @@
+import axios from '../api/interceptors'
+import { getRatingsUrl } from '../config/api.config'
+
+export const ratingService = {
+	async setRating(movieId: string, value: number) {
+		return axios.post<string>(getRatingsUrl(`/setrating`), { movieId, value })
+	},
+	async getByUserMovie(movieId: string) {
+		return axios.get<number>(getRatingsUrl(`/${movieId}`))
+	},
+}

@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import React, { FC } from 'react'
 import { useQuery } from 'react-query'
 
@@ -12,7 +13,7 @@ const PopularMovies: FC = () => {
 		'popular movies for sidebar',
 		() => movieService.getPopularMovies()
 	)
-	isSuccess && console.log(data.data)
+
 	return isLoading ? (
 		<div>
 			<SkeletonLoader count={3} className={'h-28 mb-4'} />
@@ -21,7 +22,7 @@ const PopularMovies: FC = () => {
 		<div>
 			<MovieList
 				link={'/trending'}
-				movies={data?.data || []}
+				movies={data?.data.slice(0, 3) || []}
 				title={'Популярные фильмы'}
 			/>
 		</div>

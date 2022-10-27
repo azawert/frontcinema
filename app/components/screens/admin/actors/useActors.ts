@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { ChangeEvent, useMemo, useState } from 'react'
 import { useMutation, useQuery } from 'react-query'
 import { toastr } from 'react-redux-toastr'
@@ -7,11 +8,7 @@ import { ITableItem } from '@/ui/admintable/adminTable/admintable.interface'
 import useDebounce from '@/hooks/useDebounce'
 
 import { actorService } from '@/services/actor.service'
-import { UserService } from '@/services/user.service'
 
-import { convertMongoDate } from '@/utils/date/convertMongoDate'
-
-import actors from '../../../../../pages/manage/actors'
 import { getAdminUrl } from '../../../../config/url.config'
 
 export const useActors = () => {
@@ -56,15 +53,30 @@ export const useActors = () => {
 			},
 		}
 	)
+	const { push, query } = useRouter()
+	const { mutateAsync: createAsync } = useMutation(
+		'create movie',
+		() => actorService.createActor(),
+		{
+			onError: () => {
+				toastr.error('Actor creation failed', '')
+			},
+			onSuccess: (data) => {
+				toastr.success('Actor page created', '')
+				push(getAdminUrl(`actor/edit/${data.data}`))
+			},
+		}
+	)
+
 	return useMemo(
 		() => ({
 			handleSearch,
 			...queryData,
 			searchTerm,
 			deleteAsync,
-
+			createAsync,
 			setSearchTerm,
 		}),
-		[queryData, searchTerm, deleteAsync]
+		[queryData, searchTerm, deleteAsync, createAsync]
 	)
 }

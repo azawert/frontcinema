@@ -1,6 +1,5 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
-import config from 'tailwindcss/defaultConfig'
 
 import { removeTokensStorage } from '@/services/auth/auth.helper'
 import { AuthService } from '@/services/auth/auth.service'

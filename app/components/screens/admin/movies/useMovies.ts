@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { ChangeEvent, useMemo, useState } from 'react'
 import { useMutation, useQuery } from 'react-query'
 import { toastr } from 'react-redux-toastr'
@@ -58,15 +59,30 @@ export const useMovies = () => {
 			},
 		}
 	)
+	const { push } = useRouter()
+	const { mutateAsync: createAsync } = useMutation(
+		'create movie',
+		() => movieService.createMovie(),
+		{
+			onError: () => {
+				toastr.error('Movie creation failed', '')
+			},
+			onSuccess: (data) => {
+				toastr.success('Movie created', '')
+				console.log(data)
+				push(getAdminUrl(`movie/edit/${data.data}`))
+			},
+		}
+	)
 	return useMemo(
 		() => ({
 			handleSearch,
 			...queryData,
 			searchTerm,
 			deleteAsync,
-
+			createAsync,
 			setSearchTerm,
 		}),
-		[queryData, searchTerm, deleteAsync]
+		[queryData, searchTerm, deleteAsync, createAsync]
 	)
 }

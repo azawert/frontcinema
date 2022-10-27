@@ -29,6 +29,7 @@ const GenreList = () => {
 				handleSearch={handleSearch}
 				searchTerm={searchTerm}
 				onClick={createAsync}
+				data={data}
 			/>
 			{
 				<AdminTable

@@ -8,7 +8,7 @@ export interface IGenre {
 	icon: TypeIconName
 }
 
-export interface IParameters {
+export interface IParametrs {
 	year: number
 	duration: number
 	country: string
@@ -27,7 +27,7 @@ export interface IMovie {
 	poster: string
 	title: string
 	bigPoster: string
-	parameters: IParameters
+	parametrs: IParametrs
 	genres: IGenre[]
 	actors: IActor[]
 	countOpened: number

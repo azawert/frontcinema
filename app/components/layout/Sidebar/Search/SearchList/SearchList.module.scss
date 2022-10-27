@@ -3,7 +3,7 @@
   top: calc(100% + 15px);
 
   >a{
-    @apply flex items-center py-0;
+    @apply flex items-center py-0 justify-around;
 
     &::after{
       @apply absolute -right-0.5 h-0 w-0.5 bg-transparent;

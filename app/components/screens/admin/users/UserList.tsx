@@ -16,7 +16,11 @@ const UserList = () => {
 			<AdminNavigation />
 			<Heading title={'Users'} />
 
-			<AdminHeader handleSearch={handleSearch} searchTerm={searchTerm} />
+			<AdminHeader
+				handleSearch={handleSearch}
+				searchTerm={searchTerm}
+				data={data}
+			/>
 			{
 				<AdminTable
 					headerItems={['email', 'registration date']}

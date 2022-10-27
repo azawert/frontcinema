@@ -10,13 +10,24 @@ import Heading from '@/ui/heading/Heading'
 import Meta from '@/utils/meta/Meta'
 
 const MovieList = () => {
-	const { handleSearch, searchTerm, deleteAsync, data, isLoading } = useMovies()
+	const {
+		handleSearch,
+		searchTerm,
+		deleteAsync,
+		data,
+		isLoading,
+		createAsync,
+	} = useMovies()
 	return (
 		<Meta title={'Movies'}>
 			<AdminNavigation />
 			<Heading title={'Movies'} />
 
-			<AdminHeader handleSearch={handleSearch} searchTerm={searchTerm} />
+			<AdminHeader
+				handleSearch={handleSearch}
+				searchTerm={searchTerm}
+				onClick={createAsync}
+			/>
 			{
 				<AdminTable
 					headerItems={['Title', 'Genres', 'Rating']}

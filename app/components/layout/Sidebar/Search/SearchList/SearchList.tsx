@@ -12,7 +12,11 @@ const SearchList: FC<{ movies: IMovie[] }> = ({ movies }) => {
 		<div className={styles.list}>
 			{movies.length > 0 ? (
 				movies.map((movie) => (
-					<Link href={getMovieUrl(movie.slug)} key={movie._id}>
+					<Link
+						href={getMovieUrl(movie.slug)}
+						key={movie._id}
+						className={'mb-10'}
+					>
 						<a>
 							<Image
 								src={movie.poster}
